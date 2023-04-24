@@ -44,10 +44,7 @@ const Navbar = () => {
               height={40}
               className="rounded-full"
             />
-            <div className="">
-              <p>Hello,</p>
-              <p>{user?.fullName}</p>
-            </div>
+            <p className="text-gray-500">{user?.fullName}</p>
           </div>
           <Button>
             <SignOutButton />
