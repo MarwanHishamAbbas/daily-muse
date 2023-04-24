@@ -12,7 +12,7 @@ export const buttonVariants = cva(
       variant: {
         default: "bg-violet-600 hover:bg-violet-500",
         ghost:
-          "hover:underline underline-offset-4 transition-all text-[#101828]",
+          "hover:underline underline-offset-4 p-0 transition-all text-[#101828]",
       },
     },
     defaultVariants: {
