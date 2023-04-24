@@ -32,7 +32,7 @@ export default function DropdownMenu() {
         >
           <Menu.Items className="absolute flex flex-col  divide-y-2 p-2 right-0 mt-2 w-40  origin-top-right  rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
             <div className="py-2">
-              Welcome,
+              Hello,
               <br /> {user?.fullName}
             </div>
             <div>

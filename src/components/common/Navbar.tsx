@@ -6,10 +6,12 @@ import Link from "next/link";
 import { SignOutButton, useAuth } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import DropdownMenu from "./DropdownMenu";
+import { useUser } from "@clerk/nextjs";
 
 const Navbar = () => {
   const router = useRouter();
   const { isLoaded, isSignedIn } = useAuth();
+  const { user } = useUser();
   if (!isLoaded || !isSignedIn) {
     router.push("/auth/sign-in");
   }
@@ -34,6 +36,19 @@ const Navbar = () => {
           <Link target="_blank" href="/create">
             <Button variant="ghost">Create Post</Button>
           </Link>
+          <div className="flex items-center gap-2">
+            <Image
+              src={user?.profileImageUrl || ""}
+              alt="Current User"
+              width={40}
+              height={40}
+              className="rounded-full"
+            />
+            <div className="">
+              <p>Hello,</p>
+              <p>{user?.fullName}</p>
+            </div>
+          </div>
           <Button>
             <SignOutButton />
           </Button>
