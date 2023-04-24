@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+section {
+  @apply py-[60px] md:py-[100px] lg:py-[120px] bg-white w-full;
+}
