@@ -4,13 +4,14 @@ import React, { FC } from "react";
 import { cva, VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
+import Link from "next/link";
 
 export const buttonVariants = cva(
-  "text-white flex items-center gap-2 rounded-md transition-colors px-5 py-3 disabled:opacity-50 disabled:pointer-events-none ",
+  "text-white text-sm flex items-center gap-2 rounded-md transition-colors px-5 py-3 disabled:opacity-50 disabled:pointer-events-none ",
   {
     variants: {
       variant: {
-        default: "bg-purple-500 hover:bg-purple-400",
+        default: "bg-violet-600 hover:bg-violet-500",
         ghost:
           "hover:underline underline-offset-4 transition-all text-[#101828]",
       },
@@ -32,6 +33,7 @@ const Button: FC<ButtonProps> = ({
   variant,
   className,
   isLoading,
+
   ...props
 }) => {
   return (
