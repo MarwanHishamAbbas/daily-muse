@@ -11,7 +11,7 @@ const Navbar = () => {
   const router = useRouter();
   const { user } = useUser();
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const { signOut, userId, isLoaded, isSignedIn } = useAuth();
+  const { signOut, isLoaded, isSignedIn } = useAuth();
   if (!isLoaded || !isSignedIn) {
     return null;
   }
@@ -43,23 +43,13 @@ const Navbar = () => {
           <Link target="_blank" href="https://marwanhisham.com">
             <Button variant="ghost">Developer</Button>
           </Link>
-          {userId ? (
-            <div className="flex items-center gap-2">
-              <span>Hello, {user?.firstName}</span>
-              <Button onClick={signUserOut} isLoading={isLoading}>
-                Sign Out
-              </Button>
-            </div>
-          ) : (
-            <>
-              <Link href="/auth/sign-in">
-                <Button variant="ghost">Login</Button>
-              </Link>
-              <Link href="/auth/sign-up">
-                <Button>Sign Up</Button>
-              </Link>
-            </>
-          )}
+
+          <div className="flex items-center gap-2">
+            <span>Hello, {user?.firstName}</span>
+            <Button onClick={signUserOut} isLoading={isLoading}>
+              Sign Out
+            </Button>
+          </div>
         </div>
       </nav>
     </header>

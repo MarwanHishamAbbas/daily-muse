@@ -1,10 +1,8 @@
 import "@/styles/globals.css";
+import Image from "next/image";
 
 export const metadata = {
-  title: "Daily Muse ",
-  description:
-    "Discover the latest news, tips, and insights on [blog topic] from our team of expert bloggers.",
-  icons: "/icon.svg",
+  title: "Daily Muse | Authentication",
 };
 
 export default function RootLayout({
@@ -12,5 +10,16 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <section>{children}</section>;
+  return (
+    <body className="h-screen w-full flex items-center justify-between overflow-hidden">
+      <div className="w-full lg:basis-1/2">{children}</div>
+      <Image
+        src="/auth-pattern.png"
+        alt="Authentication Pattern"
+        width={1000}
+        height={1000}
+        className="h-full w-full lg:basis-1/2 object-cover hidden lg:block"
+      />
+    </body>
+  );
 }

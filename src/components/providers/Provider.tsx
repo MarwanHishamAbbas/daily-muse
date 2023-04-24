@@ -6,8 +6,8 @@ const Provider = ({ children }: { children: React.ReactNode }) => {
       publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
       appearance={{
         elements: {
-          rootBox: "mx-auto",
-          formButtonPrimary: "text-sm capitalize px-5 py-3",
+          rootBox: "mx-auto lg:scale-110",
+          formButtonPrimary: "text-sm  capitalize px-5 py-3",
         },
         variables: {
           colorPrimary: "#7c3aed",
