@@ -2,10 +2,11 @@
 
 import { Menu, Transition } from "@headlessui/react";
 import { Fragment } from "react";
-import { SignOutButton, useUser } from "@clerk/nextjs";
+import { useUser } from "@clerk/nextjs";
 import Image from "next/image";
 import Button from "./Button";
 import Link from "next/link";
+import SignOutButton from "../SignOutButton";
 
 export default function DropdownMenu() {
   const { user } = useUser();
@@ -35,13 +36,15 @@ export default function DropdownMenu() {
               <p className="text-gray-500">{user?.fullName}</p>
             </div>
             <div>
-              <Menu.Item as={Link} href="/create">
+              <Menu.Item as={Link} href="/create-post">
                 <Button variant="ghost" className="py-2">
                   Create Post
                 </Button>
               </Menu.Item>
-              <Menu.Item as={SignOutButton}>
-                <Button className="w-full justify-center mt-2">Sign Out</Button>
+              <Menu.Item>
+                <SignOutButton className="w-full justify-center mt-2">
+                  Sign Out
+                </SignOutButton>
               </Menu.Item>
             </div>
           </Menu.Items>

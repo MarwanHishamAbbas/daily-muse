@@ -1,7 +1,10 @@
 import Navbar from "@/components/common/Navbar";
 import Provider from "@/components/providers/Provider";
 import "@/styles/globals.css";
+
 import { Inter } from "next/font/google";
+import { auth } from "@clerk/nextjs/app-beta";
+import { redirect } from "next/navigation";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,6 +20,11 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const { userId } = auth();
+
+  if (!userId) {
+  }
+
   return (
     <Provider>
       <html lang="en">
