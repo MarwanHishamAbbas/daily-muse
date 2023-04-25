@@ -13,6 +13,7 @@ interface Props {
 const QueryProvider = ({ children }: Props) => (
   <QueryClientProvider client={queryClient}>
     <Toaster />
+
     {children}
   </QueryClientProvider>
 );

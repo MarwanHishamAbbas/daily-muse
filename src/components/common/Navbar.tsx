@@ -22,12 +22,10 @@ const Navbar = () => {
           <Link target="_blank" href="https://marwanhisham.com">
             <Button variant="ghost">Developer</Button>
           </Link>
-          <Link href="/create-post">
-            <Button variant="ghost">Create Post</Button>
-          </Link>
+
           <UserButton
-            afterSignOutUrl="/auth/sign-in"
-            afterMultiSessionSingleSignOutUrl="/auth/sign-in"
+            afterSignOutUrl="/sign-in"
+            afterMultiSessionSingleSignOutUrl="/sign-in"
           />
         </div>
       </nav>

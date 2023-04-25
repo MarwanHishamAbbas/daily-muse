@@ -6,8 +6,9 @@ import toast from "react-hot-toast";
 import axios, { AxiosError } from "axios";
 import Button from "@/components/common/Button";
 import { useRouter } from "next/navigation";
-import MarkdownEditor from "@/components/MarkdownEditor";
+
 import { TextInput } from "@mantine/core";
+import { PlusIcon } from "lucide-react";
 
 export default function CreatePostForm() {
   const [title, setTitle] = useState("");
@@ -50,24 +51,21 @@ export default function CreatePostForm() {
 
   return (
     <form
+      className="mx-auto w-full md:w-1/2 bg-gray-100 rounded-md p-4"
       onSubmit={submitPost}
-      className="bg-white rounded-md flex flex-col gap-7 w-full md:w-1/2 mx-auto "
     >
       <div className="flex flex-col ">
         <TextInput
+          py={10}
           name="title"
-          placeholder="Article Title"
+          placeholder="Title"
           value={title}
           onChange={(event) => setTitle(event.currentTarget.value)}
         />
       </div>
 
-      <MarkdownEditor setContent={setContent} />
-      <Button
-        className="flex justify-center"
-        isLoading={isDisabled}
-        type="submit"
-      >
+      <Button className="mx-auto mt-7" isLoading={isDisabled} type="submit">
+        <PlusIcon />
         Create post
       </Button>
     </form>

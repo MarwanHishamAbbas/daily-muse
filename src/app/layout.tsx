@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`text-black px-5 container w-full max-w-7xl mx-auto mt-32 ${inter.className}`}
+        className={`text-black px-5 w-full max-w-7xl mx-auto mt-32 ${inter.className}`}
       >
         <QueryProvider>
           <Provider>
