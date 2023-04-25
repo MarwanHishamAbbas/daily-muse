@@ -10,7 +10,7 @@ export default async function handler(
   if (!userId) {
     return res.status(401).json("Please Sign in to create a post");
   }
-  const title = req.body;
-  console.log(title);
-  return res.status(200).json({ title });
+  const data = req.body;
+  console.log(data);
+  return res.status(200).json({ data });
 }

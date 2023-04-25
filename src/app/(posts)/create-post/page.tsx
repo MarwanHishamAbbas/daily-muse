@@ -44,14 +44,14 @@ export default function CreatePost() {
   };
 
   return (
-    <form onSubmit={submitPost} className="bg-white my-8 p-8 rounded-md ">
-      <div className="flex flex-col my-4">
+    <form onSubmit={submitPost} className="bg-white rounded-md ">
+      <div className="flex flex-col ">
         <textarea
           onChange={(e) => setTitle(e.target.value)}
           value={title}
           name="title"
           placeholder="What's on your mind?"
-          className="p-4 text-lg rounded-md my-2  bg-gray-200"
+          className=""
         />
       </div>
       <div className=" flex items-center justify-between gap-2">
