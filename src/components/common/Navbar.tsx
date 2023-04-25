@@ -3,13 +3,9 @@
 import Image from "next/image";
 import Button from "./Button";
 import Link from "next/link";
-import DropdownMenu from "./DropdownMenu";
-import { useUser } from "@clerk/nextjs";
-import SignOutButton from "../SignOutButton";
+import { UserButton } from "@clerk/nextjs";
 
 const Navbar = () => {
-  const { user } = useUser();
-
   return (
     <header className="fixed h-20 flex items-center max-w-7xl mx-auto px-5 backdrop-blur-sm top-0 left-0 right-0 w-full">
       <nav className="flex justify-between items-center w-full">
@@ -22,25 +18,17 @@ const Navbar = () => {
             quality={100}
           />
         </Link>
-        <DropdownMenu />
-        <div className="gap-5 hidden md:flex items-center">
+        <div className="gap-5 flex items-center">
           <Link target="_blank" href="https://marwanhisham.com">
             <Button variant="ghost">Developer</Button>
           </Link>
           <Link href="/create-post">
             <Button variant="ghost">Create Post</Button>
           </Link>
-          <div className="flex items-center gap-2">
-            <Image
-              src={user?.profileImageUrl || ""}
-              alt="Current User"
-              width={40}
-              height={40}
-              className="rounded-full"
-            />
-            <p className="text-gray-500">{user?.fullName}</p>
-          </div>
-          <SignOutButton />
+          <UserButton
+            afterSignOutUrl="/auth/sign-in"
+            afterMultiSessionSingleSignOutUrl="/auth/sign-in"
+          />
         </div>
       </nav>
     </header>

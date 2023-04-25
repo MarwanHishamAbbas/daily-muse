@@ -4,7 +4,6 @@ import "@/styles/globals.css";
 
 import { Inter } from "next/font/google";
 import { auth } from "@clerk/nextjs/app-beta";
-import { redirect } from "next/navigation";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,15 +25,15 @@ export default function RootLayout({
   }
 
   return (
-    <Provider>
-      <html lang="en">
+    <html lang="en">
+      <Provider>
         <body
           className={`text-black px-5 container w-full max-w-7xl mx-auto mt-32 ${inter.className}`}
         >
           <Navbar />
           {children}
         </body>
-      </html>
-    </Provider>
+      </Provider>
+    </html>
   );
 }
