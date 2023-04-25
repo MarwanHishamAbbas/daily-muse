@@ -19,6 +19,7 @@ export default async function handler(
     const result = await db.post.create({
       data: {
         title: data.title,
+        content: data.content,
         authorId: userId,
       },
     });

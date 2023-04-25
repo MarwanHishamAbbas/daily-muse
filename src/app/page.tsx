@@ -19,9 +19,9 @@ export default async function Home() {
         </Paragraph>
       </section>
       <section className="grid grid-cols-1 md:grid-cols-2 gap-10">
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
+        {posts.map((post, idx) => (
+          <BlogCard key={idx} post={post} />
+        ))}
       </section>
     </>
   );
