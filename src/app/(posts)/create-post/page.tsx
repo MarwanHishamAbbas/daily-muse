@@ -1,57 +1,69 @@
 "use client";
 
+import { useMutation, useQueryClient } from "react-query";
 import { useState } from "react";
-import { useForm } from "@mantine/form";
-import { TextInput, Code } from "@mantine/core";
+import toast from "react-hot-toast";
+import axios, { AxiosError } from "axios";
 import Button from "@/components/common/Button";
-import LargeHeading from "@/components/common/LargeHeading";
-import createNewPost from "@/helpers/create-new-post";
+import { useRouter } from "next/navigation";
 
-function CreatePostPage() {
-  const [submittedValues, setSubmittedValues] = useState("");
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+export default function CreatePost() {
+  const [title, setTitle] = useState("");
+  const [isDisabled, setIsDisabled] = useState(false);
+  const router = useRouter();
+  const queryClient = useQueryClient();
+  let toastPostID: string;
 
-  const form = useForm({
-    initialValues: {
-      title: "",
-    },
-  });
-
-  const sendPostData = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setIsLoading(true);
-    try {
-      form.onSubmit((values) => {
-        setSubmittedValues(JSON.stringify(values, null, 2));
-      });
-      await createNewPost(submittedValues).then((res) => res);
-    } catch (error) {
-      if (error instanceof Error) {
-        throw new Error(error.message ?? "Internal Server Error");
-      }
-    } finally {
-      setIsLoading(false);
+  // Create a post
+  const { mutate } = useMutation(
+    async (title: string) =>
+      await axios.post("/api/posts/create", {
+        title,
+      }),
+    {
+      onError: (error) => {
+        if (error instanceof AxiosError) {
+          toast.error(error.message, { id: toastPostID });
+        }
+        setIsDisabled(false);
+      },
+      onSuccess: (data) => {
+        queryClient.invalidateQueries(["posts"]);
+        toast.success("Post has been made", { id: toastPostID });
+        setTitle("");
+        setIsDisabled(false);
+        router.replace("/");
+      },
     }
+  );
+  const submitPost = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsDisabled(true);
+    toastPostID = toast.loading("Creating your post", { id: toastPostID });
+    mutate(title);
   };
 
   return (
-    <section className="w-full md:w-1/2 mx-auto">
-      <LargeHeading className="mb-4">Create New Post</LargeHeading>
-      <form className="flex flex-col gap-4" onSubmit={sendPostData}>
-        <TextInput
-          label="Title"
-          placeholder="Title"
-          {...form.getInputProps("title")}
+    <form onSubmit={submitPost} className="bg-white my-8 p-8 rounded-md ">
+      <div className="flex flex-col my-4">
+        <textarea
+          onChange={(e) => setTitle(e.target.value)}
+          value={title}
+          name="title"
+          placeholder="What's on your mind?"
+          className="p-4 text-lg rounded-md my-2  bg-gray-200"
         />
-
-        <Button isLoading={isLoading} className="mx-auto mt-3" type="submit">
-          Create Post
+      </div>
+      <div className=" flex items-center justify-between gap-2">
+        <p
+          className={`font-bold text-sm ${
+            title.length > 300 ? "text-red-700" : "text-gray-700"
+          } `}
+        >{`${title.length}/300`}</p>
+        <Button isLoading={isDisabled} type="submit">
+          Create post
         </Button>
-      </form>
-
-      {submittedValues && <Code block>{submittedValues}</Code>}
-    </section>
+      </div>
+    </form>
   );
 }
-
-export default CreatePostPage;

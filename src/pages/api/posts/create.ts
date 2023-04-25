@@ -6,10 +6,11 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { session } = getAuth(req);
-  if (!session) {
-    return res.status(401).json({ message: "Please Sign in to create a post" });
+  const { userId } = getAuth(req);
+  if (!userId) {
+    return res.status(401).json("Please Sign in to create a post");
   }
-  const values = req.body;
-  console.log(values);
+  const title = req.body;
+  console.log(title);
+  return res.status(200).json({ title });
 }

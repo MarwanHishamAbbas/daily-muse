@@ -1,5 +1,6 @@
 import Navbar from "@/components/common/Navbar";
 import Provider from "@/components/providers/Provider";
+import QueryProvider from "@/components/providers/QueryProvider";
 import "@/styles/globals.css";
 
 import { Inter } from "next/font/google";
@@ -23,10 +24,12 @@ export default function RootLayout({
       <body
         className={`text-black px-5 container w-full max-w-7xl mx-auto mt-32 ${inter.className}`}
       >
-        <Provider>
-          <Navbar />
-          {children}
-        </Provider>
+        <QueryProvider>
+          <Provider>
+            <Navbar />
+            {children}
+          </Provider>
+        </QueryProvider>
       </body>
     </html>
   );
