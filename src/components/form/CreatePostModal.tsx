@@ -1,7 +1,6 @@
 "use client";
 
 import { Group, Collapse } from "@mantine/core";
-import { TypographyStylesProvider } from "@mantine/core";
 
 import { useDisclosure } from "@mantine/hooks";
 import CreatePostForm from "../form/CreatePostForm";
@@ -23,9 +22,6 @@ const CreatePostModal = ({}) => {
       <Collapse in={opened}>
         <CreatePostForm />
       </Collapse>
-      <TypographyStylesProvider>
-        <div dangerouslySetInnerHTML={{ __html: "<h1>Your html here</h1>" }} />
-      </TypographyStylesProvider>
     </div>
   );
 };

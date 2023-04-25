@@ -1,6 +1,7 @@
 "use client";
 
 import { useMutation, useQueryClient } from "react-query";
+
 import { useState } from "react";
 import toast from "react-hot-toast";
 import axios, { AxiosError } from "axios";
@@ -9,6 +10,7 @@ import { useRouter } from "next/navigation";
 
 import { TextInput } from "@mantine/core";
 import { PlusIcon } from "lucide-react";
+import MarkdownEditor from "./MarkdownEditor";
 
 export default function CreatePostForm() {
   const [title, setTitle] = useState("");
@@ -38,7 +40,6 @@ export default function CreatePostForm() {
         setTitle("");
         setContent(null);
         setIsDisabled(false);
-        router.replace("/");
       },
     }
   );
@@ -62,6 +63,7 @@ export default function CreatePostForm() {
           value={title}
           onChange={(event) => setTitle(event.currentTarget.value)}
         />
+        <MarkdownEditor setContent={setContent} />
       </div>
 
       <Button className="mx-auto mt-7" isLoading={isDisabled} type="submit">
