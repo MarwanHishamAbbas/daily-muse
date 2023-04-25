@@ -1,10 +1,10 @@
+import BlogCard from "@/components/BlogCard";
 import LargeHeading from "@/components/common/LargeHeading";
 import Paragraph from "@/components/common/Paragraph";
 import { db } from "@/lib/db";
 
 export default async function Home() {
   const posts = await db.post.findMany();
-  console.log(posts);
   return (
     <>
       <section className="text-center">
@@ -18,7 +18,11 @@ export default async function Home() {
           The latest industry news, interviews, technologies, and resources.
         </Paragraph>
       </section>
-      <section></section>
+      <section className="grid grid-cols-1 md:grid-cols-2 gap-10">
+        <BlogCard />
+        <BlogCard />
+        <BlogCard />
+      </section>
     </>
   );
 }

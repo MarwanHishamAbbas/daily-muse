@@ -13,11 +13,7 @@ export default async function handler(
       .status(401)
       .json({ error: "Please Sign in before", createdPost: null });
   }
-  const prismaUser = await db.user.findUnique({
-    where: {
-      id: userId,
-    },
-  });
+
   const data = req.body;
   try {
     const result = await db.post.create({
