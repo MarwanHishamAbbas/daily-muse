@@ -27,7 +27,7 @@ const Navbar = () => {
           <Link target="_blank" href="https://marwanhisham.com">
             <Button variant="ghost">Developer</Button>
           </Link>
-          <Link target="_blank" href="/create-post">
+          <Link href="/create-post">
             <Button variant="ghost">Create Post</Button>
           </Link>
           <div className="flex items-center gap-2">
