@@ -10,7 +10,7 @@ import { Post } from "@prisma/client";
 function BlogCard({ post }: { post: Post }) {
   return (
     <Card shadow="sm" padding="lg" radius="md" className="">
-      <Image src="/demo.jpeg" alt="Norway" className=" object-fill" />
+      {/* <Image src="/demo.jpeg" alt="Norway" className=" object-fill" /> */}
 
       <LargeHeading size="sm" className="text-left mt-10">
         {post?.title}
