@@ -14,18 +14,20 @@ function CreatePostPage() {
   const form = useForm({
     initialValues: {
       title: "",
-      coverImage: "",
-      content: "",
     },
   });
 
-  const sendPostData = async () => {
+  const sendPostData = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     setIsLoading(true);
     try {
-      await createNewPost(submittedValues);
+      form.onSubmit((values) => {
+        setSubmittedValues(JSON.stringify(values, null, 2));
+      });
+      await createNewPost(submittedValues).then((res) => res);
     } catch (error) {
       if (error instanceof Error) {
-        throw new Error(error.message);
+        throw new Error(error.message ?? "Internal Server Error");
       }
     } finally {
       setIsLoading(false);
@@ -35,13 +37,7 @@ function CreatePostPage() {
   return (
     <section className="w-full md:w-1/2 mx-auto">
       <LargeHeading className="mb-4">Create New Post</LargeHeading>
-      <form
-        className="flex flex-col gap-4"
-        onSubmit={form.onSubmit((values) => {
-          setSubmittedValues(JSON.stringify(values, null, 2));
-          sendPostData();
-        })}
-      >
+      <form className="flex flex-col gap-4" onSubmit={sendPostData}>
         <TextInput
           label="Title"
           placeholder="Title"
