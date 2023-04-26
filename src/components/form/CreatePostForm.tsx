@@ -14,7 +14,7 @@ import MarkdownEditor from "./MarkdownEditor";
 
 export default function CreatePostForm() {
   const [title, setTitle] = useState("");
-  const [content, setContent] = useState<any>();
+  const [content, setContent] = useState<string>("");
   const [isDisabled, setIsDisabled] = useState(false);
   const router = useRouter();
   const queryClient = useQueryClient();
@@ -38,7 +38,7 @@ export default function CreatePostForm() {
         queryClient.invalidateQueries(["posts"]);
         toast.success("Post has been made", { id: toastPostID });
         setTitle("");
-        setContent(null);
+        setContent("");
         setIsDisabled(false);
       },
     }
@@ -63,7 +63,7 @@ export default function CreatePostForm() {
           value={title}
           onChange={(event) => setTitle(event.currentTarget.value)}
         />
-        <MarkdownEditor setContent={setContent} />
+        <MarkdownEditor isDisabled={isDisabled} setContent={setContent} />
       </div>
 
       <Button className="mx-auto mt-7" isLoading={isDisabled} type="submit">

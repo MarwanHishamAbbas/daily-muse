@@ -19,12 +19,13 @@ export default async function handler(
     const result = await db.post.create({
       data: {
         title: data.title,
-        content: data.content,
+        content: data?.content,
         authorId: userId,
       },
     });
     return res.status(200).json({ createdPost: result, error: null });
   } catch (error) {
+    console.log(error);
     return res
       .status(401)
       .json({ error: "Error Creating new Post", createdPost: null });

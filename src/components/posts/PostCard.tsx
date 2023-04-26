@@ -1,17 +1,18 @@
 "use client";
 
-import { CreatePostData } from "@/types/api";
 import LargeHeading from "../common/LargeHeading";
 import { TypographyStylesProvider } from "@mantine/core";
 
-const PostCard = ({ post }: { post: CreatePostData }) => {
+const PostCard = ({ post }: { post: any }) => {
   return (
     <div>
-      <LargeHeading size="sm">{post.createdPost?.title}</LargeHeading>
+      <LargeHeading className="text-left" size="sm">
+        {post.title}
+      </LargeHeading>
       <TypographyStylesProvider>
         <div
           dangerouslySetInnerHTML={{
-            __html: "<h1>Hello</h1>" as string,
+            __html: post.content as string,
           }}
         />
       </TypographyStylesProvider>

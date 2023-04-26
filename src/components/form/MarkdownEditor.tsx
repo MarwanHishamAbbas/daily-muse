@@ -7,8 +7,6 @@ import TextAlign from "@tiptap/extension-text-align";
 import Superscript from "@tiptap/extension-superscript";
 import SubScript from "@tiptap/extension-subscript";
 
-const content = "";
-
 function MarkdownEditor({ setContent }: { setContent: any }) {
   const editor = useEditor({
     extensions: [
@@ -18,10 +16,13 @@ function MarkdownEditor({ setContent }: { setContent: any }) {
       Superscript,
       SubScript,
       Highlight,
-      TextAlign.configure({ types: ["heading", "paragraph"] }),
+      TextAlign.configure({
+        types: ["heading", "paragraph"],
+        defaultAlignment: "left",
+      }),
     ],
-    content,
-    onUpdate: ({ editor }) => {
+    content: "",
+    onUpdate: async ({ editor }) => {
       const html = editor.getHTML();
       setContent(html);
     },
