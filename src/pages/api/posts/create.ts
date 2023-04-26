@@ -1,14 +1,25 @@
 import { db } from "@/lib/db";
 import { CreatePostData } from "@/types/api";
-import { getAuth } from "@clerk/nextjs/server";
+import { clerkClient, getAuth } from "@clerk/nextjs/server";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<CreatePostData>
 ) {
-  const { userId } = getAuth(req);
-  if (!userId) {
+  const getCurrentUserId = async () => {
+    const { user, userId } = getAuth(req);
+    return { user, userId };
+  };
+  const currentUserId = (await getCurrentUserId()).userId;
+
+  const sessionUser = await clerkClient.users.getUser(currentUserId || "");
+
+  const prismaUser = await db.user.findUnique({
+    where: { email: "marwanhiisham@gmail.com" },
+  });
+  console.log(prismaUser);
+  if (!sessionUser) {
     return res
       .status(401)
       .json({ error: "Please Sign in before", createdPost: null });
@@ -20,7 +31,7 @@ export default async function handler(
       data: {
         title: data.title,
         content: data?.content,
-        authorId: userId,
+        authorId: prismaUser?.id,
       },
     });
     return res.status(200).json({ createdPost: result, error: null });

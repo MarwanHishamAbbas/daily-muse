@@ -15,8 +15,9 @@ model Post {
   content    String?  @db.VarChar(10000)
   createdAt  DateTime @default(now())
   published  Boolean  @default(false)
-  author     User?    @relation(fields: [authorId], references: [id])
-  authorId   String?
+  authorId   String
+  timestamp  DateTime @default(now())
+  author     User     @relation(fields: [authorId], references: [id])
 
   @@index([authorId])
 }

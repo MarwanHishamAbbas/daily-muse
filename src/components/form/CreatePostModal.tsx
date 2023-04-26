@@ -11,13 +11,11 @@ const CreatePostModal = ({}) => {
   const [opened, { toggle }] = useDisclosure(false);
 
   return (
-    <div className="mt-10 ">
-      <Group position="center" mb={10}>
-        <Button onClick={toggle}>
-          <Book />
-          New Post
-        </Button>
-      </Group>
+    <div className="mt-10  flex flex-col items-center">
+      <Button onClick={toggle}>
+        <Book />
+        New Post
+      </Button>
 
       <Collapse in={opened}>
         <CreatePostForm />
